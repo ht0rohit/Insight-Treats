@@ -1,0 +1,89 @@
+<div class="top">
+Logged in as {{username}} 
+<br />
+<a href="/logout/">Click here to logout</a>
+</div>
+
+<!DOCTYPE html>
+<html lang = "en">
+
+	<head>
+		<title>Insight Treats | SIT</title>
+		<meta charset = UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{url_for('static', filename='profile.css')}}" />
+
+	</head>
+	
+	<body>
+        <div class="profile">
+			<img src="{{url_for('static', filename='profile.jpg')}}" id="profile">
+			<div class="red"></div>
+			
+		</div>
+		<!--<div class="trans">
+			<div class="black">-->
+					<div id="grad1"></div>
+				
+						<!--</div>
+		</div>-->
+		
+		<div id="myNav" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<div class="overlay-content">
+					<div class="timeline">
+							<div class="container left">
+							  <div class="content">
+								<h2>2017</h2>
+								<p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+							  </div>
+							</div>
+							<div class="container right">
+							  <div class="content">
+								<h2>2016</h2>
+								<p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+							  </div>
+							</div>
+							<div class="container left">
+							  <div class="content">
+								<h2>2015</h2>
+								<p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+							  </div>
+							</div>
+							<div class="container right">
+							  <div class="content">
+								<h2>2012</h2>
+								<p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+							  </div>
+							</div>
+							<div class="container left">
+							  <div class="content">
+								<h2>2011</h2>
+								<p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+							  </div>
+							</div>
+							<div class="container right">
+							  <div class="content">
+								<h2>2007</h2>
+								<p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+							  </div>
+							</div>
+						  </div>
+			</div>
+		</div>
+			  
+
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()" id="open">&#9776; open</span>	
+		
+		<script>
+			function openNav() {
+				document.getElementById("myNav").style.width = "100%";
+			}
+				
+			function closeNav() {
+				document.getElementById("myNav").style.width = "0%";
+			}
+		</script>
+	</body>
+	
+</html>

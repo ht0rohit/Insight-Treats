@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+	<head>
+		<title>Insight Treats | SIT</title>
+		<meta charset = UTF-8">
+		<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+		<link rel="stylesheet" href="{{url_for('static', filename='logreg.css')}}" />
+	</head>
+
+	<body>
+
+{% with messages = get_flashed_messages() %}
+   {% if messages %}
+      {% for message in messages %}
+         {{ message }}
+      {% endfor %}
+   {% endif %}
+{% endwith %}
+
+<div class="container2">
+	<div class="row2">
+			  <div class="column2">
+<form action = '/register/' method = POST class='form2'>
+<fieldset>
+<legend>Chaos isn't a pit. Chaos is a ladder. Let's Climb | SIGN UP</legend>
+{{ reg.hidden_tag() }}
+		   
+	<div style = font-size:20px; font-weight:bold; margin-left:150px;>
+		 
+		{{ reg.fname(placeholder="Name") }}
+	<br>
+		
+		{{ reg.uname(placeholder="User Name") }}
+  	<br>
+		
+		{{ reg.emailid(placeholder="E-mail ID") }}
+	<br>
+			  
+		{{ reg.pwd(placeholder="Password") }}
+	<br>
+		
+		{{ reg.submit }}
+	</div>
+</fieldset>
+</form>
+</div>
+</div>
+</div>
+
+<div class="signin">
+	<button type="button" style="font-family: 'Ruthie'; font-size: 30px;" id="signin">SignIn</button>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{{url_for('static', filename='form.js')}}"></script>
+</body>
+</html>

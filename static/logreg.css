@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+}
+
+/* Style inputs */
+input[type=text], select, textarea, text {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+    background: transparent;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+/* Style the container/contact section */
+.container1, .container2 {
+    border-radius: 25px;
+    padding: 1px 6px 6px 6px;
+}
+
+/* Create two columns that float next to eachother */
+.column1, .column2 {
+    float: left;
+    width: 35%;
+    margin-top: 2px;
+}
+
+/* Clear floats after the columns */
+.row1:after, .row1:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#signup {
+	position: absolute;
+	left: 780px;
+	top: 100px;
+	border-radius: 10px;
+	background: transparent;
+	color: rgb(104, 0, 0);
+    padding: 3px;
+}
+#signup:hover {
+	background-color: #ceb6b6;
+	color: red;
+}
+
+#signin {
+	position: absolute;
+	left: 780px;
+	top: 100px;
+    border-radius: 10px;
+	background: transparent;
+	color: rgb(104, 0, 0);
+    padding: 3px;
+}
+#signin:hover {
+	background-color: #ceb6b6;
+	color: red;
+}
+
+.form1 {
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+.form2 {
+    position: relative;
+    top: 20px;
+    left: 20px;
+}

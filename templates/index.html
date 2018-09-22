@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+	<head>
+		<title>Insight Treats | SIT</title>
+		<meta charset = UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="{{url_for('static', filename='par.css')}}" />
+		<link rel="stylesheet" href="{{url_for('static', filename='sticky.css')}}" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	</head>
+	
+	<body>
+		<div class="header">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="{{url_for('static', filename='bg1.jpg')}}">
+				<div class="tag">
+					<p style="font-family: 'Montez'; font-size: 36px" class="up">My two great treats in life are Vanilla Ice-Cream and other's Insight into my code. What's Yours?</p>
+					<p style="font-family: 'Emilys Candy'; font-size: 22px;" class="down">¿GOT IDEA? | GET INSIGHT | AND NO MORE EXCUSES FOR NOT CODING</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="social">
+			<a href="#" class="fb btn"><i class="fa fa-facebook fa-fw"></i> </a>
+			<a href="#" class="twitter btn"><i class="fa fa-twitter fa-fw"></i> </a>
+			<a href="#" class="google btn"><i class="fa fa-google fa-fw"></i> </a>
+		</div>
+
+		<div id="navbar" style="font-family: 'Montez';">
+			<a href="#contact">Contact</a>
+			<a href="#sign">SignIn/Up</a>
+			<a href="#about1">About</a>
+		</div> 
+	
+		<div class="main">
+			<div class="info">	
+				<img src="{{url_for('static', filename='dell.png')}}" id="dell" />
+			</div>		
+
+			<section id="about1">
+				<p id="about11" style="font-family: 'Special Elite'; font-size: 35px;">Showcase your previous and ongoing projects and gain insights from others by searching
+					 for and interacting with other people on the basis of their projects, technologies used and their experiences in the most unique way.</p>
+			</section>
+		</div>
+
+		<div class="parallax-w" data-parallax="scroll" data-image-src="{{url_for('static', filename='bg.jpg')}}">
+			<a name="sign"></a>
+			<button type="button" style="font-family: 'Ruthie'; font-size: 30px;" id="signin">SignIn</button> 
+			<button type="button" style="font-family: 'Ruthie'; font-size: 30px;" id="signup">SignUp</button> 
+		</div>
+
+		<div class="row-md-4">
+			<div class="col-md-1">
+				<p id="service-description-1" style="font-family: 'Montez'; font-size: 35px;">Make your project details visible or hidden to people or a particular person as per your comfort.</p>
+			</div>
+			<div class="col-md-2">
+				<p id="service-description-2" style="font-family: 'Montez'; font-size: 30px;">Do you know too much but don't know where to implement it? Offer help to people having less knowledge but great ideas.</p>
+			</div>
+			<div class="col-md-3">
+				<p id="service-description-3" style="font-family: 'Montez'; font-size: 30px;">Get relevant suggestions for people simultaneously, achieved through machine learning.</p>
+			</div>
+		</div>								
+
+		<section id="contact" class="container parallax-c" data-parallax="scroll" data-image-src="{{url_for('static', filename='contact-bg.jpg')}}">
+			<div style="text-align:center">
+				<h2>Contact Us</h2>
+			  	<p>Swing by for a cup of coffee, or leave us a message:</p>
+			</div>
+			<div class="row">
+			  	<div class="column">
+					<div class="map">
+						<!--<img src="{{url_for('static', filename='map.png')}}" id="map" />-->
+						<ul id="address">
+							<li><i class="fa fa-map-marker"></i> <span>Address:</span> Sinhgad Institute of Technology, Lonavala </li>
+							<li><i class="fa fa-phone"></i> <span> Phone:</span> +91- 7000338552  </li>
+							<li><i class="fa fa-envelope"></i> <span> Email:</span><a href="mailto:ht97kumarrk@gmail.com"> rohit@insi8treats.in</a></li>
+							<li><i class="fa fa-globe"></i> <span>Website:</span> <a href="#">www.insighttreats.in</a></li>
+						</ul>
+					</div>
+			  	</div>
+			  	<div class="column">
+					<div class="form">
+						<form action = '#' method = POST>
+						{{ log.hidden_tag() }}
+							<div style = font-size:20px; font-weight:bold;>
+								{{ con.fname(placeholder="Name") }} 
+							<br> 
+								{{ con.emailid(placeholder="E-mail ID") }} 
+							<br> 
+								{{ con.text(placeholder="Message") }}
+							<br> 
+								 {{ con.submit(placeholder="Leave Message") }}
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="end"></div>
+				
+			</div>
+		</section>
+
+		<link href="https://fonts.googleapis.com/css?family=Akronim|Allura|Almendra+Display|Bad+Script|Barrio|Butcherman|Creepster|Emblema+One|Emilys+Candy|Ewert|Fontdiner+Swanky|Frijole|Griffy|Gugi|Hanalei|Henny+Penny|Leckerli+One|Lovers+Quarrel|Macondo+Swash+Caps|Miltonian|Molle:400i|Montez|Mrs+Sheppards|New+Rocker|Nosifer|Rock+Salt|Ruthie|Special+Elite|Supermercado+One" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="{{url_for('static', filename='parallax.js')}}"></script>
+		<script src="{{url_for('static', filename='form.js')}}"></script>
+		<script>
+			window.onscroll = function() {myFunction()};
+				
+			var navbar = document.getElementById("navbar");
+			var sticky = navbar.offsetTop;
+				
+			function myFunction() {
+				if (window.pageYOffset >= sticky) {
+					navbar.classList.add("sticky")
+				} else {
+					navbar.classList.remove("sticky");
+				}
+			}
+		</script>
+		
+	</body>
+	
+</html>

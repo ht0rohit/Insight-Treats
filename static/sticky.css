@@ -1,0 +1,155 @@
+* {
+    box-sizing: border-box;
+}
+
+/* Style inputs */
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.parallax-c {
+    background: transparent;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	min-height: 707px;
+	min-width: 1520px;
+	z-index: -100;
+}
+
+/* Style the container/contact section */
+.container {
+	position: absolute;
+	left: 0px;
+	top: 2150px;
+	right: 0px;
+    border-radius: 65px;
+    padding: 1px 6px 6px 6px;
+    height: 370px;
+}
+
+/* Create two columns that float next to eachother */
+.column {
+    float: left;
+    width: 50%;
+    margin-top: 2px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.map {
+    float: left;
+    margin-left: 52px;
+    color: rgb(242, 254, 255);
+    font-size: 17px;
+}
+
+li {
+    padding: 4px;
+}
+
+#signin {
+	position: absolute;
+	left: 620px;
+	top: 100px;
+    border-radius: 10px;
+	background: transparent;
+	color: rgb(104, 0, 0);
+    padding: 3px;
+}
+
+#signin:hover {
+	background-color: #ceb6b6;
+	color: red;
+}
+
+#signup {
+	position: absolute;
+	left: 780px;
+	top: 100px;
+	border-radius: 10px;
+	background: transparent;
+	color: rgb(104, 0, 0);
+    padding: 3px;
+}
+
+#signup:hover {
+	background-color: #ceb6b6;
+	color: red;
+}
+
+* {
+    box-sizing: border-box;
+  }
+  
+  /* style inputs and link buttons */
+  .btn {
+    width: 15%;
+    height: 25%;
+    padding: 12px;
+    border: none;
+    border-radius: 17px;
+    margin: 5px 0;
+    opacity: 0.85;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 20px;
+    text-decoration: none; /* remove underline from anchors */
+  }
+  
+  /* add appropriate colors to fb, twitter and google buttons */
+  .fb {
+    background-color: #3B5998;
+    color: white;
+  }
+  
+  .twitter {
+    background-color: #55ACEE;
+    color: white;
+  }
+  
+  .google {
+    background-color: #dd4b39;
+    color: white;
+  }
+  
+  /* Two-column layout */
+  .social {
+    background-position: fixed;
+    position: fixed;
+    left: 1320px;
+    top: 712px;
+    float: left;
+    width: 25%;
+    margin: auto;
+    padding: 0 50px;
+    margin-top: 6px;
+    z-index: 200;
+  }
+
+  #fname, #emailid, #text {
+      background: transparent;
+  }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+	<head>
+		<title>Insight Treats | SIT</title>
+		<meta charset = UTF-8">
+		<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+		<link rel="stylesheet" href="{{url_for('static', filename='logreg.css')}}" />
+	</head>
+
+	<body>
+
+{% with messages = get_flashed_messages() %}
+   {% if messages %}
+      {% for message in messages %}
+         {{ message }}
+      {% endfor %}
+   {% endif %}
+{% endwith %}
+
+	<div class="container1">
+		<div class="row1">
+			  	<div class="column1">
+					<form action = '/login/' method = POST class='form1'>
+						<fieldset>
+						<legend>I'm not questioning your honor. I'm denying its existence. Prove It | SIGN IN</legend>
+						{{ log.hidden_tag() }}
+								   
+							<div style = font-size:20px; font-weight:bold;>
+								{{ log.uname(placeholder="User Name") }}
+							<br>
+									  
+								{{ log.pwd(placeholder="Password") }}
+							<br>
+									  
+								{{ log.cook }} {{ log.cook.label }}
+							<br>
+								{{ log.submit }}
+							</div>
+						</fieldset>
+					</form>
+			  	</div>
+		</div>
+	</div>
+
+	<div class="signup">
+		<button type="button" style="font-family: 'Ruthie'; font-size: 30px;" id="signup">SignUp</button>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="{{url_for('static', filename='form.js')}}"></script>
+</body>
+</html>
