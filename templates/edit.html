@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+	<head>
+		<title>Insight Treats | SIT</title>
+		<meta charset = UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{url_for('static', filename='edit.css')}}" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+	</head>
+	
+	<body>
+        <img src="{{url_for('static', filename='contact-bg.jpg')}}" >
+        <div class="bg">
+            <div class="details">
+                <form action = '/next/{{uname}}' method = POST>
+					<fieldset>
+					<legend id="legend">Please fill in the following details</legend>
+					
+								   
+						<div style = font-size:20px; font-weight:bold; class="edit">
+                            {{ ed.iam.label }}  {{ ed.iam(placeholder="ex: a Web Developer") }}
+						<br>
+						  
+                            {{ ed.ii.label }}    {{ ed.ii(placeholder="ex: develop dynamic websites") }}
+						<br>
+									  
+                            {{ ed.trends.label }}   {{ ed.trends(placeholder="Tech trends people need to know to work in this field") }}
+                        <br>
+                        <br>
+
+                            {{ ed.python }} {{ ed.python.label }} {{ ed.cpp }} {{ ed.cpp.label }} {{ ed.java }} {{ ed.java.label }} {{ ed.js }} {{ ed.js.label }} {{ ed.iot }} {{ ed.iot.label }}
+                            {{ ed.ml }} {{ ed.ml.label }} {{ ed.vr }} {{ ed.vr.label }} {{ ed.ar }} {{ ed.ar.label }} {{ ed.cc }} {{ ed.cc.label }} {{ ed.eh }} {{ ed.eh.label }}
+                        <br>
+                        <br>
+                        
+                            {{ ed.proficiency.label }}  {{ ed.proficiency }}
+                        <br>
+
+                            {{ ed.p_name.label }}  {{ ed.p_name(placeholder="Project Title") }}
+                            {{ ed.des(placeholder="Project you have worked upon") }}
+                            {{ ed.lang(placeholder="Languages used in this project, separated by comma") }}
+                
+                        <br>
+                            {{ ed.github.label }}
+                            {{ ed.github (placeholder="Your GitHub profile ") }}
+                            
+							{{ ed.submit }}
+						</div>
+					</fieldset>
+				</form>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </body>    
+</html>

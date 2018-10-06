@@ -9,6 +9,9 @@
 		<link rel="stylesheet" href="{{url_for('static', filename='sticky.css')}}" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="{{url_for('static', filename='parallax.js')}}"></script>
+		<script src="{{url_for('static', filename='form.js')}}"></script>
 	</head>
 	
 	<body>
@@ -39,7 +42,7 @@
 			</div>		
 
 			<section id="about1">
-				<p id="about11" style="font-family: 'Special Elite'; font-size: 35px;">Showcase your previous and ongoing projects and gain insights from others by searching
+				<p id="about11" style="font-family: 'Montez'; font-size: 42px;">Showcase your previous and ongoing projects and gain insights from others by searching
 					 for and interacting with other people on the basis of their projects, technologies used and their experiences in the most unique way.</p>
 			</section>
 		</div>
@@ -82,7 +85,7 @@
 			  	<div class="column">
 					<div class="form">
 						<form action = '#' method = POST>
-						{{ log.hidden_tag() }}
+						<!--{{ log.hidden_tag() }}-->
 							<div style = font-size:20px; font-weight:bold;>
 								{{ con.fname(placeholder="Name") }} 
 							<br> 
@@ -103,8 +106,6 @@
 
 		<link href="https://fonts.googleapis.com/css?family=Akronim|Allura|Almendra+Display|Bad+Script|Barrio|Butcherman|Creepster|Emblema+One|Emilys+Candy|Ewert|Fontdiner+Swanky|Frijole|Griffy|Gugi|Hanalei|Henny+Penny|Leckerli+One|Lovers+Quarrel|Macondo+Swash+Caps|Miltonian|Molle:400i|Montez|Mrs+Sheppards|New+Rocker|Nosifer|Rock+Salt|Ruthie|Special+Elite|Supermercado+One" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="{{url_for('static', filename='parallax.js')}}"></script>
-		<script src="{{url_for('static', filename='form.js')}}"></script>
 		<script>
 			window.onscroll = function() {myFunction()};
 				

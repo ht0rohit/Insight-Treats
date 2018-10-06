@@ -1,0 +1,56 @@
+.details1 {
+    position: absolute;
+    top: 90px;
+    z-index: 300;
+}
+
+.details2 {
+    position: absolute;
+    top: 790px;
+    z-index: 300;
+    width: 1500px;
+}
+
+#white, #flash {
+    color: white;
+}
+
+select, textarea {
+    width: 99%;
+    padding-left: 6px;
+    padding-right: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 16px;
+    margin-left: 10px;
+    resize: vertical;
+    background: transparent;
+    color: white;
+}
+
+input[type=submit]{
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type=reset] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #a04b45;
+}
+
+input[type=reset]:hover {
+    background-color: #a04b45;
+}
+
+#legend {
+    color: white;
+}

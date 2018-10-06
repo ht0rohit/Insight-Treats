@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+	<head>
+		<title>Insight Treats | SIT</title>
+		<meta charset = UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{url_for('static', filename='url.css')}}" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{url_for('static', filename='random.js')}}"></script>
+        
+    </head>
+    
+    <body onload="myFunction()">
+      
+
+         <form action = '/save/' method = POST class="details2" >
+          <fieldset>
+          <legend id="legend">Please fill in the following details</legend>
+          <div id="flash">
+              {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                 {% for message in messages %}
+                    {{ message }}
+                 {% endfor %}
+              {% endif %}
+           {% endwith %}
+          </div>
+          
+                   
+            <div style = font-size:20px; font-weight:bold; id="white">
+                            {{ed.uname}}
+                            {{ ed.p_name.label }}  {{ ed.p_name(placeholder="Project Title") }}
+                            {{ ed.des(placeholder="Project you have worked upon") }}
+                            {{ ed.lang(placeholder="Languages used in this project, separated by comma") }}
+                            
+              {{ ed.submit }}
+              <input class="button" type="reset" value="Reset" id="reset" ></input>
+            </div>
+          </fieldset>
+        </form>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+    </body>
+</html>

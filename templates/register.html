@@ -6,6 +6,8 @@
 		<meta charset = UTF-8">
 		<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 		<link rel="stylesheet" href="{{url_for('static', filename='logreg.css')}}" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="{{url_for('static', filename='form.js')}}"></script>
 	</head>
 
 	<body>
@@ -24,9 +26,9 @@
 <form action = '/register/' method = POST class='form2'>
 <fieldset>
 <legend>Chaos isn't a pit. Chaos is a ladder. Let's Climb | SIGN UP</legend>
-{{ reg.hidden_tag() }}
+<!--{{ reg.hidden_tag() }}-->
 		   
-	<div style = font-size:20px; font-weight:bold; margin-left:150px;>
+	<div style = font-size:20px; font-weight:bold; margin-left:150px; class="form22">
 		 
 		{{ reg.fname(placeholder="Name") }}
 	<br>
@@ -53,6 +55,5 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="{{url_for('static', filename='form.js')}}"></script>
 </body>
 </html>
