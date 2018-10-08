@@ -24,7 +24,9 @@ select, textarea {
     margin-left: 10px;
     resize: vertical;
     background: transparent;
-    color: white;
+    color: rgb(255, 255, 255);
+    /*font-family: arial;*/
+    font-size: 15px;
 }
 
 input[type=submit]{

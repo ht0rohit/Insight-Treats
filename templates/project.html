@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html>
 
 	<head>
 		<title>Insight Treats | SIT</title>
@@ -8,45 +8,43 @@
         <link rel="stylesheet" href="{{url_for('static', filename='profile.css')}}" />
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+                function mClick (y) {
+                    //alert(username)
+                        $.ajax({
+                            url : "/hover/" + '{{username}}' + '/',
+                            type: 'GET',
+                            success: function(result){
+                                //alert(result);
+                                $('.timeline').html(result);
+                            }
+                        });
+                    }
+        </script>
         
     </head>
     
     <body>
-      
-        <div class="container left">
-            <div class="content">
-                    <a>{% for x in range(1) %} 
-                           
-                                        {{ pro[x][0]|safe }} 
-                                        <br><br>
-                                        {{ pro[x][1]|safe }} 
-                                        <br><br>
-                                        {{ pro[x][2]|safe }} 
-                        
-                        {% endfor %}
-                
-                    </a>
-            </div>
-        </div>
+        {% for x in range(pro|count) %}
+            {% if (x%2)==0 %}
+                <div class="container lt">
+                    <div class="content" onclick="mClick(this)"> 
+                        <a> {{ pro[x][0]|safe }} <br><br> {{ pro[x][1]|safe }} <br><br> {{ pro[x][2]|safe }} </a>
+                    </div> 
+                </div>
+            {% endif %}
+            {% if (x%2)!=0 %}
+                <div class="container rt"> 
+                    <div class="content" onclick="mClick(this)"> 
+                        <a> {{ pro[x][0]|safe }} <br><br> {{ pro[x][1]|safe }} <br><br> {{ pro[x][2]|safe }} </a> 
+                    </div> 
+                </div>
+            {% endif %}
+        {% endfor %}
 
-        <div class="container right">
-            <div class="content">
-                    <a>{% for x in range(50,51) %}
-                            {% if 50 < pro|length %}
-                            
-                                         {{ pro[x][0]|safe }} 
-                                         <br><br>
-                                         {{ pro[x][1]|safe }} 
-                                         <br><br>
-                                         {{ pro[x][2]|safe }} 
-                            {% endif %}
-                         {% endfor %}
-                 
-                     </a>
-            </div>
-        </div>
+        Hello There
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        
+    
     </body>
 </html>

@@ -2,6 +2,12 @@
     background-color: rgb(177, 177, 177);
 }*/
 
+.active {
+    background: black;
+    color: white;
+}
+
+
 #profile {
     position: absolute;
     top: 0px;
@@ -65,6 +71,7 @@
     font-size: 70px;
     font-family: 'Allura';
     color: white;
+    text-align: center;
 }
 
 .iam {
@@ -125,16 +132,6 @@
     margin-top: 30px;
 }
 
-/*.overlay a {
-    padding: 8px;
-    text-decoration: none;
-    font-size: 36px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-}*/
-
-
 .overlay .closebtn:hover, .overlay .closebtn:focus {
     color: #f1f1f1;
 }
@@ -172,19 +169,6 @@
     margin-left: -3px;
 }
 
-#open1 {
-    position: fixed;
-    color: rgb(12, 1, 1);
-    top: 500px;
-    left: -70px;
-    transform: rotate(-90deg);
-    height: 80px;
-    width: 170px;
-    background: black;
-    opacity: 0.45;
-    border-bottom-left-radius: 50px;
-}
-
 /* Container around content */
 .container {
     padding: 10px 40px;
@@ -208,17 +192,17 @@
 }
 
 /* Place the container to the left */
-.left {
+.lt {
     left: 0;
 }
 
 /* Place the container to the right */
-.right {
-    left: 50%;
+.rt {
+    right: -50%;
 }
 
 /* Add arrows to the left container (pointing right) */
-.left::before {
+.lt::before {
     content: " ";
     height: 0;
     position: absolute;
@@ -232,7 +216,7 @@
 }
 
 /* Add arrows to the right container (pointing left) */
-.right::before {
+.rt::before {
     content: " ";
     height: 0;
     position: absolute;
@@ -246,7 +230,7 @@
 }
 
 /* Fix the circle for containers on the right side */
-.right::after {
+.rt::after {
     left: -16px;
 }
 
@@ -256,6 +240,7 @@
     background-color: white;
     position: relative;
     border-radius: 6px;
+    display: block;
 }
 
 .content a {
@@ -263,9 +248,9 @@
     text-decoration: none;
 }
 
-.content:hover {
+/*.content:hover {
     background-color: rgb(141, 151, 150);
-}
+}*/
 
 
 
@@ -306,19 +291,34 @@
 #open2 {
     position: fixed;
     color: rgb(12, 1, 1);
-    top: 300px;
-    left: -75px;
+    top: 285px;
+    left: -64px;
     transform: rotate(-90deg);
-    height: 80px;
+    height: 75px;
+    width: 160px;
     background: black;
     opacity: 0.45;
     border-bottom-right-radius: 50px;
 }
 
-#open3 {
+#open1 {
     position: fixed;
     color: rgb(12, 1, 1);
-    top: 660px;
+    top: 465px;
+    left: -60px;
+    transform: rotate(-90deg);
+    height: 80px;
+    width: 145px;
+    background: black;
+    opacity: 0.45;
+    border-bottom-left-radius: 50px;
+}
+
+
+#open3 {
+    position: absolute;
+    color: rgb(12, 1, 1);
+    top: 620px;
     left: -30px;
     transform: rotate(-90deg);
     height: 60px;
@@ -326,4 +326,5 @@
     background: black;
     opacity: 0.45;
     border-radius: 25px;
+    text-decoration: none;
 }

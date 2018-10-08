@@ -3,7 +3,7 @@ from forms import Login, Register, Contact, Edit
 from profile import Profile
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
-import secrets, mysql.connector, bleach, hashlib
+import secrets, mysql.connector, bleach, hashlib, random
 from smtplib import SMTPRecipientsRefused
 
 app = Flask(__name__)
@@ -63,6 +63,12 @@ sql3 = """CREATE TABLE IF NOT EXISTS project (
 )"""
 c.execute(sql3)
 
+sql4 = """CREATE TABLE IF NOT EXISTS req (
+	id int NOT NULL,
+	details VARCHAR(255) NOT NULL
+)"""
+c.execute(sql4)
+
 
 def make_pwd_hash(uname, pwd):
 	has = hashlib.sha256((uname + pwd + 'valardohaeris').encode('utf-8')).hexdigest()
@@ -112,7 +118,7 @@ def login():
 			if result[0] == 'y':
 				cook = request.form.get('cook')
 				if cook:
-					c.execute("select iam from profile")
+					c.execute("select iam from profile where username = %s", (bleach.clean(uname),))
 					fetch = c.fetchone()
 					if fetch != None:
 						return "success"
@@ -132,7 +138,13 @@ def login():
 @app.route('/edit/<uname>/')
 def edit(uname):
 	ed  = Edit()
-	return render_template('edit.html', uname = uname, ed = ed)
+
+	c.execute("select iam from profile where username = %s", (bleach.clean(uname),))
+	fetch = c.fetchone()
+	if fetch == None:
+		return render_template('edit.html', uname = uname, ed = ed)
+	else:
+		return redirect(url_for('student', username = uname))
 
 
 @app.route('/next/<uname>', methods = ['GET', 'POST'])
@@ -179,6 +191,7 @@ def success(uname):
 
 @app.route('/<username>/', methods = ['GET', 'POST'])
 def student(username):
+	#print(username)
 	ed  = Edit(uname = username)
 
 	if request.method == 'GET':
@@ -210,7 +223,13 @@ def student(username):
 				obj = Profile(obj_name_cap, obj_iam, obj_ii, obj_trends,obj_python, obj_cpp, obj_java, obj_js, obj_iot, obj_ml, obj_vr, obj_ar, obj_cc, obj_eh, obj_proficiency, obj_github)
 				c.execute("select name from student")
 				stud = [item[0] for item in c.fetchall()]
-				return render_template('success.html', username = username, stud = stud, obj = obj, ed = ed)
+
+				c.execute("select username, iam, ii from profile where username != %s", (bleach.clean(username),))
+				exe1 = c.fetchall()
+				# a sequence or set will work here		# set the number to select here.
+				exe = random.sample(exe1, 4)
+
+				return render_template('success.html', username = username, stud = stud, obj = obj, ed = ed, exe = exe)
 			else:
 				redirect(url_for('logout'))
 		else:
@@ -282,33 +301,35 @@ def save():
 
 @app.route('/project/<username>/')
 def project(username):
-
+	print(username)
 	c.execute("select p_name, des, lang from project where username = %s", (bleach.clean(username),))
 	pro = c.fetchall()
+	print(pro)
 
-	#dic = {}
-	#for x in range(len(pro)):
-	#	dic[x] = '' 
-	
-	#for x in range(len(pro)):
-	#	print(pro[x][0])
-		#dic[x]['p_name'] = pro[x][0]
-		#ic[x]['des'] = pro[x][1]
-		#dic[x]['lang'] = pro[x][2] 
-
-	#payload = {
-    #   "p_name": pro[0][0],
-    #  "des": pro[0][1],
-    #   "lang": pro[0][2]
-    #}
-	#print(dic)
-	#return "Hello"
-
-	for item in pro:
-		print(item[0])
-
-	return render_template('project.html', pro = pro)
+	return render_template('project.html', pro = pro, username = username)
 	#return jsonify(payload)
+
+@app.route('/hover/<username>/')
+def hover(username):
+	#print(p)
+	#o = p.split(', ')
+	#print (o)
+	#o1 = o[0]
+	print(username)
+	c.execute("select username, lang from project")
+	res = c.fetchall()
+	exe = random.sample(res, 4)
+	return render_template('hover.html', exe = exe, username = username)
+
+
+#@app.route('/hovout/')
+#def hovout():
+#	#c.execute("select details from req where id = 1")
+#	#fet = c.fetchone()
+#	
+#	return "Success"
+
+
 
 @app.route('/profile/<res>/')
 def profile(res):
@@ -378,7 +399,8 @@ def confirm_email(token):
 		c.execute("select username from student where email = %s", (bleach.clean(emailid),))
 		un = c.fetchone()
 		uname = un[0]
-		resp = make_response(redirect(url_for('student', username = uname)))
+		
+		resp = make_response(redirect(url_for('edit', uname = uname)))
 		has = make_cookie_hash(uname)
 		resp.set_cookie('userID', has, max_age=2592000)
 		return resp
@@ -392,4 +414,5 @@ def confirm_email(token):
 if __name__ == '__main__':
 	app.secret_key = secrets.token_bytes(32)
 	app.debug = True
-	app.run(host = '0.0.0.0', port = 8000)
+	app.run(host = '0.0.0.0', port = 5000)
+	#app.run --host = '0.0.0.0'

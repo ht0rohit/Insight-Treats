@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html>
 <head>
     <title>Insight Treats | SIT</title>
     <meta charset = UTF-8">
@@ -8,8 +8,10 @@
 
 <link rel="stylesheet" href="{{url_for('static', filename='search.css')}}" />
 <link rel="stylesheet" href="{{url_for('static', filename='url.css')}}" />
+<link rel="stylesheet" href="{{url_for('static', filename='carousel.css')}}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="{{url_for('static', filename='random.js')}}"></script>
+<script src="{{url_for('static', filename='jquery.hoverCarousel.js')}}"></script>
 
 </head>     
 
@@ -41,13 +43,13 @@
 </div>
 
 <div class="userid">
-	<h2> {{obj.name}} </h2>
+	<h2> {{ obj.name|title }} </h2>
 </div>
 
 <div class="iam">
 	<h2 id="i"> I am a </h2>
-	<h2 id="designer"> Designer </h2>
-	<h3 id="what"> I design awesome websites {{pro}} </h3>
+	<h2 id="designer"> {{obj.iam}} </h2>
+	<h3 id="what"> I {{obj.ii}} </h3>
 	<h4 id="loremipsum">Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</h4>
 </div>
 
@@ -61,16 +63,8 @@
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav1()">&times;</a>
 	<div class="overlay-content">
 			<div class="timeline">
-					
-          
-					<!-- <div class="container right">
-					  <div class="content">
-						<h2>2016</h2>
-						<p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-					  </div>
-					</div> -->
-					
-				  </div>
+							
+			</div>
 	</div>
 </div>
 
@@ -139,28 +133,68 @@
 <span style="font-size:30px;cursor:pointer" onclick="openNav1()" id="open1">&#9776; Projects</span>	
 <a href="/logout/" id="open3">LogOut</a>
 
+
+<div class="carousel rt">
+    
+      <div class="indicator"></div>
+    
+      <div class="wrap">
+    
+      <ul>
+
+        {% for x in range(exe|count) %}
+        <!--<img src="{{url_for('static', filename='contact.jpg')}}" />-->
+          <li><a href="/{{ exe[x][0] }}/"> {{ exe[x][0]|upper }} <br /> <br /> I am {{ exe[x][1] }} <br /> <br /> I {{ exe[x][2] }} </a></li>    
+        {% endfor %}
+    
+      <!--<li><img src="{{url_for('static', filename='profile.jpg')}}" /></li>
+    
+      <li><img src="{{url_for('static', filename='bg.jpg')}}" /></li>
+    
+      <li><img src="{{url_for('static', filename='bg1.jpg')}}" /></li>
+
+      <li><img src="{{url_for('static', filename='contact.jpg')}}" /></li>
+    
+      <li><img src="{{url_for('static', filename='contact-bg.jpg')}}" /></li>
+
+      <li><img src="{{url_for('static', filename='dell.png')}}" /></li>
+      <li><img src="{{url_for('static', filename='profile.jpg')}}" /></li>
+    
+      <li><img src="{{url_for('static', filename='bg.jpg')}}" /></li>
+    
+      <li><img src="{{url_for('static', filename='bg1.jpg')}}" /></li>
+
+      <li><img src="{{url_for('static', filename='contact.jpg')}}" /></li>
+    
+      <li><img src="{{url_for('static', filename='contact-bg.jpg')}}" /></li>
+
+      <li><img src="{{url_for('static', filename='dell.png')}}" /></li> -->
+    
+      </ul>
+    
+      </div>
+    
+      </div>
+
+
 <link href="https://fonts.googleapis.com/css?family=Akronim|Allura|Almendra+Display|Bad+Script|Barrio|Butcherman|Creepster|Emblema+One|Emilys+Candy|Ewert|Fontdiner+Swanky|Frijole|Griffy|Gugi|Hanalei|Henny+Penny|Leckerli+One|Lovers+Quarrel|Macondo+Swash+Caps|Miltonian|Molle:400i|Montez|Mrs+Sheppards|New+Rocker|Nosifer|Rock+Salt|Ruthie|Special+Elite|Supermercado+One" rel="stylesheet">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
+  
+
 	function openNav1() {
     document.getElementById("myNav").style.width = "100%";
-    
+    //alert('{{username}}')
     $.ajax({
-      url : "/project/{{username}}/",
+      url : "/project/" + '{{username}}' + '/',
       type: 'GET',
       success: function(result){
         $(".timeline").html(result);
-
-        var v = $('.content').find('a').text();
-        alert(v);
-        if (v == '') {
-            $(this).hide();
-        }
       }   
   });
-	}
+}
 		
 	function closeNav1() {
     document.getElementById("myNav").style.width = "0%";
