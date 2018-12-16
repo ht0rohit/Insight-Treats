@@ -29,20 +29,79 @@
             {% if (x%2)==0 %}
                 <div class="container lt">
                     <div class="content" onclick="mClick(this)"> 
-                        <a> {{ pro[x][0]|safe }} <br><br> {{ pro[x][1]|safe }} <br><br> {{ pro[x][2]|safe }} </a>
+                        <a> {{ pro[x][0]|safe }} <br><br> {{ pro[x][1]|safe }} <br><br> 
+                            {% if pro[x][2] == 'y' %}
+                                Python
+                            {% endif %}
+                            {% if pro[x][3] == 'y' %}
+                                Cpp 
+                            {% endif %}
+                            {% if pro[x][4] == 'y' %}
+                                Java 
+                            {% endif %}
+                            {% if pro[x][5] == 'y' %}
+                                JavaScript 
+                            {% endif %}
+                            {% if pro[x][6] == 'y' %}
+                                InternetOfThings 
+                            {% endif %}
+                            {% if pro[x][7] == 'y' %}
+                                MachineLearning 
+                            {% endif %}
+                            {% if pro[x][8] == 'y' %}
+                                VirtualReality 
+                            {% endif %}
+                            {% if pro[x][9] == 'y' %}
+                                AugmentedReality 
+                            {% endif %}
+                            {% if pro[x][10] == 'y' %}
+                                CloudComputing 
+                            {% endif %}
+                            {% if pro[x][11] == 'y' %}
+                                EthicalHacking 
+                            {% endif %}</a>
                     </div> 
                 </div>
             {% endif %}
             {% if (x%2)!=0 %}
                 <div class="container rt"> 
                     <div class="content" onclick="mClick(this)"> 
-                        <a> {{ pro[x][0]|safe }} <br><br> {{ pro[x][1]|safe }} <br><br> {{ pro[x][2]|safe }} </a> 
+                        <a> {{ pro[x][0]|safe }} <br><br> {{ pro[x][1]|safe }} <br><br> 
+                        {% if pro[x][2] == 'y' %}
+                            Python 
+                        {% endif %}
+                        {% if pro[x][3] == 'y' %}
+                            Cpp
+                        {% endif %}
+                        {% if pro[x][4] == 'y' %}
+                            Java
+                        {% endif %}
+                        {% if pro[x][5] == 'y' %}
+                            JavaScript 
+                        {% endif %}
+                        {% if pro[x][6] == 'y' %}
+                            InternetOfThings 
+                        {% endif %}
+                        {% if pro[x][7] == 'y' %}
+                            MachineLearning 
+                        {% endif %}
+                        {% if pro[x][8] == 'y' %}
+                            VirtualReality 
+                        {% endif %}
+                        {% if pro[x][9] == 'y' %}
+                            AugmentedReality 
+                        {% endif %}
+                        {% if pro[x][10] == 'y' %}
+                            CloudComputing
+                        {% endif %}
+                        {% if pro[x][11] == 'y' %}
+                            EthicalHacking 
+                        {% endif %}</a>
                     </div> 
                 </div>
             {% endif %}
         {% endfor %}
 
-        Hello There
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     

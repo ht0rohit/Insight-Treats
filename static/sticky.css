@@ -2,6 +2,11 @@
     box-sizing: border-box;
 }
 
+li {
+    display: block;
+    text-decoration: none;
+}
+
 /* Style inputs */
 input[type=text], select, textarea {
     width: 100%;
@@ -10,6 +15,7 @@ input[type=text], select, textarea {
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
+    /*color: rgb(85, 250, 214);*/
 }
 
 input[type=submit] {

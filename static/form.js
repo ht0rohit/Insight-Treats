@@ -1,3 +1,5 @@
+
+
 $(document).ready(function(){
     $('#signin').click(function(){
         $.ajax({
@@ -21,10 +23,13 @@ $(document).ready(function(){
 
     $(".form11").find('#submit').click(function(event){
         event.preventDefault();
-        var uname = $(".form11").find('#uname').val()
+
+        var uname = $(".form11").find('#uname').val();
+        var pwd= $(".form11").find('#pwd').val();
+        
         var formdata1 = {
-            'uname': $(".form11").find('#uname').val(),
-            'pwd': $(".form11").find('#pwd').val(),
+            'uname': uname,
+            'pwd': pwd,
             'cook': $(".form11").find('#cook').val()
         }
 
@@ -48,11 +53,17 @@ $(document).ready(function(){
 
     $(".form22").find('#submit').click(function(event){
         event.preventDefault();
+
+        var fname = $(".form22").find('#fname').val();
+        var uname = $(".form22").find('#uname').val();
+        var emailid= $(".form22").find('#emailid').val();
+        var pwd= $(".form22").find('#pwd').val();
+
         var formdata2 = {
-            'fname': $(".form22").find('#fname').val(),
-            'uname': $(".form22").find('#uname').val(),
-            'emailid': $(".form22").find('#emailid').val(),
-            'pwd': $(".form22").find('#pwd').val()
+            'fname': fname,
+            'uname': uname,
+            'emailid': emailid,
+            'pwd': pwd
         }
 
         $.ajax({

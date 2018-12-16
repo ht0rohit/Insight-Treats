@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Insight Treats | SIT</title>
+    <meta charset = UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{url_for('static', filename='profile.css')}}" />
+
+
+<!--<link rel="stylesheet" href="{{url_for('static', filename='url.css')}}" />-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{{url_for('static', filename='random.js')}}"></script>
+
+</head>     
+
+<body>
+
+
+
+
+<div class="profile">
+	<img src="{{url_for('static', filename='profile.jpg')}}" id="profile">
+</div>
+
+<div class="blue">
+
+</div>
+
+<div class="userid">
+	<h2 id="user"> {{ obj.name|title }} </h2>
+</div>
+
+<div class="iam">
+	<h2 id="i"> I am a </h2>
+	<h2 id="designer"> {{obj.iam}} </h2>
+	<h3 id="what"> I {{obj.ii}} </h3>
+	<h4 id="loremipsum">Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</h4>
+</div>
+
+<div id="grad1">
+</div>
+<div id="grad2">
+</div>
+
+
+<div id="myNav" class="overlay">
+	<a href="javascript:void(0)" class="closebtn" onclick="closeNav1()">&times;</a>
+	<div class="overlay-content">
+			<div class="timeline">
+							
+			</div>
+	</div>
+</div>
+
+
+  
+
+
+
+	
+<span style="font-size:30px;cursor:pointer" onclick="openNav1()" id="open1">&#9776; Projects</span>	
+<a href="/logout/" id="open3">LogOut</a>
+
+
+<link href="https://fonts.googleapis.com/css?family=Akronim|Allura|Almendra+Display|Bad+Script|Barrio|Butcherman|Creepster|Emblema+One|Emilys+Candy|Ewert|Fontdiner+Swanky|Frijole|Griffy|Gugi|Hanalei|Henny+Penny|Leckerli+One|Lovers+Quarrel|Macondo+Swash+Caps|Miltonian|Molle:400i|Montez|Mrs+Sheppards|New+Rocker|Nosifer|Rock+Salt|Ruthie|Special+Elite|Supermercado+One" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+  
+
+	function openNav1() {
+    document.getElementById("myNav").style.width = "100%";
+    //alert('{{res}}')
+    $.ajax({
+      url : "/project/" + '{{prof}}' + '/',
+      type: 'GET',
+      success: function(result){
+        $(".timeline").html(result);
+      }   
+  });
+}
+		
+	function closeNav1() {
+    document.getElementById("myNav").style.width = "0%";
+    $(".left").find("a").text('');
+    $(".right").find("a").text('');
+	}
+</script>
+
+
+
+</body>
+</html>

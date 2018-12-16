@@ -13,11 +13,41 @@
 		<script src="{{url_for('static', filename='parallax.js')}}"></script>
 		<script src="{{url_for('static', filename='form.js')}}"></script>
 	</head>
-	
+<style>	
+	.ma
+	{
+	   position : absolute;
+		top : 1%;
+        left : 29%;
+	}
+h1
+{
+	font-weight: bolder;
+	color : white;
+	font-size : 200px;
+	font-family : Montez;
+}
+
+#treats
+{
+	font-weight: bolder;
+	color : #0000ff;
+	font-family : Montez;
+	font-size : 60%;
+
+}
+</style>
 	<body>
+
+			<div class = "ma">
+					<pre><h1>Insight<span id="treats">Treats</span></h1></pre>
+					
+					</div>
+
 		<div class="header">
 			<div class="parallax-window" data-parallax="scroll" data-image-src="{{url_for('static', filename='bg1.jpg')}}">
 				<div class="tag">
+						
 					<p style="font-family: 'Montez'; font-size: 36px" class="up">My two great treats in life are Vanilla Ice-Cream and other's Insight into my code. What's Yours?</p>
 					<p style="font-family: 'Emilys Candy'; font-size: 22px;" class="down">¿GOT IDEA? | GET INSIGHT | AND NO MORE EXCUSES FOR NOT CODING</p>
 				</div>
@@ -42,8 +72,8 @@
 			</div>		
 
 			<section id="about1">
-				<p id="about11" style="font-family: 'Nosifer'; font-size: 35px;">Showcase your previous and ongoing projects and gain insights from others by searching
-					 for and interacting with other people on the basis of their projects, technologies used and their experiences in the most unique way.</p>
+				<p id="about11" style="font-family: 'Emilys Candy'; font-size: 35px;">Showcase your previous and ongoing projects and gain insights from others by searching
+					 for and interacting with other people on the basis of their projects, technologies used and their experiences.</p>
 			</section>
 		</div>
 
@@ -55,18 +85,18 @@
 
 		<div class="row-md-4">
 			<div class="col-md-1">
-				<p id="service-description-1" style="font-family: 'Montez'; font-size: 35px;">Make your project details visible or hidden to people or a particular person as per your comfort.</p>
+				<p id="service-description-1" style="font-family: 'Emilys Candy'; font-size: 28px;">Make your project details visible or hidden to people or a particular person as per your trust & convenience.</p>
 			</div>
 			<div class="col-md-2">
-				<p id="service-description-2" style="font-family: 'Montez'; font-size: 30px;">Do you know too much but don't know where to implement it? Offer help to people having less knowledge but great ideas.</p>
+				<p id="service-description-2" style="font-family: 'Emilys Candy'; font-size: 27px;">Do you know too much but don't know where to implement it? Offer help to people having less knowledge but great ideas.</p>
 			</div>
 			<div class="col-md-3">
-				<p id="service-description-3" style="font-family: 'Montez'; font-size: 30px;">Get relevant suggestions for people simultaneously, achieved through machine learning.</p>
+				<p id="service-description-3" style="font-family: 'Emilys Candy'; font-size: 27px;">Get relevant suggestions for people, simultaneously, with the help of machine learning.</p>
 			</div>
 		</div>								
 
 		<section id="contact" class="container parallax-c" data-parallax="scroll" data-image-src="{{url_for('static', filename='contact-bg.jpg')}}">
-			<div style="text-align:center">
+			<div style="text-align:center; color:white;">
 				<h2>Contact Us</h2>
 			  	<p>Swing by for a cup of coffee, or leave us a message:</p>
 			</div>
@@ -77,16 +107,16 @@
 						<ul id="address">
 							<li><i class="fa fa-map-marker"></i> <span>Address:</span> Sinhgad Institute of Technology, Lonavala </li>
 							<li><i class="fa fa-phone"></i> <span> Phone:</span> +91- 7000338552  </li>
-							<li><i class="fa fa-envelope"></i> <span> Email:</span><a href="mailto:ht97kumarrk@gmail.com"> rohit@insi8treats.in</a></li>
+							<li><i class="fa fa-envelope"></i> <span> Email:</span><a href="mailto:insi8treats@gmail.com"> rohit@insi8treats.in</a></li>
 							<li><i class="fa fa-globe"></i> <span>Website:</span> <a href="#">www.insighttreats.in</a></li>
 						</ul>
 					</div>
 			  	</div>
 			  	<div class="column">
 					<div class="form">
-						<form action = '#' method = POST>
+						<form action = '/cmail/' method = POST>
 						<!--{{ log.hidden_tag() }}-->
-							<div style = font-size:20px; font-weight:bold;>
+							<div style = "font-size:20px; font-weight:bold;">
 								{{ con.fname(placeholder="Name") }} 
 							<br> 
 								{{ con.emailid(placeholder="E-mail ID") }} 
@@ -119,6 +149,10 @@
 					navbar.classList.remove("sticky");
 				}
 			}
+		</script>
+
+		<script>
+
 		</script>
 		
 	</body>

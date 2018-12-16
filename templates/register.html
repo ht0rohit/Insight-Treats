@@ -12,6 +12,7 @@
 
 	<body>
 
+<div id="red">
 {% with messages = get_flashed_messages() %}
    {% if messages %}
       {% for message in messages %}
@@ -19,6 +20,7 @@
       {% endfor %}
    {% endif %}
 {% endwith %}
+</div>
 
 <div class="container2">
 	<div class="row2">
@@ -34,7 +36,7 @@
 	<br>
 		
 		{{ reg.uname(placeholder="User Name") }}
-  	<br>
+	<br>
 		
 		{{ reg.emailid(placeholder="E-mail ID") }}
 	<br>

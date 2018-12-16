@@ -67,14 +67,10 @@
 .userid {
     position: absolute;
     top: -20px;
-    left: 0px;
-    right: 0px;
+    left: 620px;
     font-size: 70px;
     font-family: 'Allura';
     color: white;
-}
-
-#user {
     text-align: center;
 }
 
@@ -197,7 +193,7 @@
 
 /* Place the container to the left */
 .lt {
-    left: 0;
+    left: 50%;
 }
 
 /* Place the container to the right */

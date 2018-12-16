@@ -1,9 +1,9 @@
 from flask import Flask, render_template, url_for, redirect, flash, request, session, make_response, jsonify, json
 from forms import Login, Register, Contact, Edit
-from profile import Profile
+from profile import Profile, Profile2
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
-import secrets, mysql.connector, bleach, hashlib, random
+import secrets, mysql.connector, bleach, hashlib, random, re
 from smtplib import SMTPRecipientsRefused
 
 app = Flask(__name__)
@@ -12,7 +12,7 @@ mail=Mail(app)
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'insi8treats@gmail.com'
-app.config['MAIL_PASSWORD'] = 'asdf1zxcv'
+app.config['MAIL_PASSWORD'] = 'asdfzxcv'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
@@ -21,7 +21,7 @@ mail = Mail(app)
 s = URLSafeTimedSerializer('achristmascarol')
 
 db = mysql.connector.connect(host = "localhost", user = "root", password = "aszxdfcv", database = "insight" )
-c = db.cursor()
+c = db.cursor(buffered=True)
 sql1 = """CREATE TABLE IF NOT EXISTS student (
 	id INT AUTO_INCREMENT NOT NULL UNIQUE,
 	name VARCHAR(25) NOT NULL,
@@ -58,16 +58,25 @@ sql3 = """CREATE TABLE IF NOT EXISTS project (
 	username VARCHAR(15) NOT NULL,
 	p_name VARCHAR(100) NOT NULL,
 	des VARCHAR(250) NOT NULL,
-	lang VARCHAR(100) NOT NULL,
+	python VARCHAR(4) DEFAULT 'n',
+	cpp VARCHAR(4) DEFAULT 'n',
+	java VARCHAR(4) DEFAULT 'n',
+	js VARCHAR(4) DEFAULT 'n',
+	iot VARCHAR(4) DEFAULT 'n',
+	ml VARCHAR(4) DEFAULT 'n',
+	vr VARCHAR(4) DEFAULT 'n',
+	ar VARCHAR(4) DEFAULT 'n',
+	cc VARCHAR(4) DEFAULT 'n',
+	eh VARCHAR(4) DEFAULT 'n',
 	FOREIGN KEY(username) REFERENCES student(username)
 )"""
 c.execute(sql3)
 
-sql4 = """CREATE TABLE IF NOT EXISTS req (
-	id int NOT NULL,
-	details VARCHAR(255) NOT NULL
-)"""
-c.execute(sql4)
+#sql4 = """CREATE TABLE IF NOT EXISTS req (
+#	id int NOT NULL,
+#	details VARCHAR(255) NOT NULL
+#)"""
+#c.execute(sql4)
 
 
 def make_pwd_hash(uname, pwd):
@@ -101,6 +110,20 @@ def index():
 	else:
 		return render_template('index.html', log = log, reg = reg, con = con)
 
+@app.route('/cmail/', methods = ['POST'])
+def cmail():
+	fname = request.form['fname']
+	emailid = request.form['emailid']
+	text = request.form['text']
+	##print(fname)
+	#print(emailid)
+	print(text)
+	ms = Message(fname, sender='insi8treats@gmail.com', recipients=['ht97kumarrk@gmail.com'])
+	ms.body = text + "\n" + emailid;
+	print(ms)
+	mail.send(ms)
+	return redirect(url_for('index'))
+
 
 @app.route('/login/', methods = ['GET', 'POST'])
 def login():
@@ -110,6 +133,11 @@ def login():
 	if request.method == 'POST':
 		uname = request.form['uname']
 		pwd = request.form['pwd']
+
+		if(uname == "" or pwd == ""):
+			flash('Please fill out all the fields!')
+			return redirect(url_for('login'))
+
 		c.execute("select password from student where username = %s", (bleach.clean(uname),))
 		result = c.fetchone()
 		if result != None and result[0] == make_pwd_hash(uname, pwd):
@@ -165,15 +193,10 @@ def next(uname):
 		cc = request.form.get('cc')
 		eh = request.form.get('eh')
 		proficiency = request.form['proficiency']
-		p_name = request.form['p_name']
-		des = request.form['des']
-		lang = request.form['lang']
 		github = request.form['github']
 
 		try:
 			c.execute("insert into profile values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (bleach.clean(uname), bleach.clean(iam), bleach.clean(ii), bleach.clean(trends), python, cpp, java, js, iot, ml, vr, ar, cc, eh, bleach.clean(proficiency), bleach.clean(github),))
-			db.commit()
-			c.execute("insert into project values(%s, %s, %s, %s)", (bleach.clean(uname), bleach.clean(p_name), bleach.clean(des), bleach.clean(lang),)) 
 			db.commit()
 			return redirect(url_for('success', uname = uname))
 		except:
@@ -204,32 +227,78 @@ def student(username):
 				res1 = c.fetchone()
 				obj = res[0]
 				obj_name = res[1]
-				obj_name_cap = obj_name.capitalize()
+				#obj_name_cap = obj_name.capitalize()
 				obj_iam = res1[0]
 				obj_ii = res1[1]
 				obj_trends = res1[2]
-				obj_python = res1[3]
-				obj_cpp = res1[4]
-				obj_java = res1[5]
-				obj_js = res1[6]
-				obj_iot = res1[7]
-				obj_ml = res1[8]
-				obj_vr = res1[9]
-				obj_ar = res1[10]
-				obj_cc = res1[11]
-				obj_eh = res1[12]
+
+				list1 = []
+
+				obj_python = res1[3];	
+				if obj_python == 'y':	
+					list1.append('python')
+				obj_cpp = res1[4];	
+				if obj_cpp == 'y':	
+					list1.append('cpp')
+				obj_java = res1[5];	
+				if obj_java == 'y':	
+					list1.append('java')
+				obj_js = res1[6];	
+				if obj_js == 'y':	
+					list1.append('js')
+				obj_iot = res1[7];	
+				if obj_iot == 'y':	
+					list1.append('iot')
+				obj_ml = res1[8];	
+				if obj_ml == 'y':	
+					list1.append('ml')
+				obj_vr = res1[9];	
+				if obj_vr == 'y':	
+					list1.append('vr')
+				obj_ar = res1[10];	
+				if obj_ar == 'y':	
+					list1.append('ar')
+				obj_cc = res1[11];	
+				if obj_cc == 'y':	
+					list1.append('cc')
+				obj_eh = res1[12];	
+				if obj_eh == 'y':	
+					list1.append('eh')
 				obj_proficiency = res1[13]
 				obj_github = res1[14]
-				obj = Profile(obj_name_cap, obj_iam, obj_ii, obj_trends,obj_python, obj_cpp, obj_java, obj_js, obj_iot, obj_ml, obj_vr, obj_ar, obj_cc, obj_eh, obj_proficiency, obj_github)
+				obj = Profile(obj_name, obj_iam, obj_ii, obj_trends,obj_python, obj_cpp, obj_java, obj_js, obj_iot, obj_ml, obj_vr, obj_ar, obj_cc, obj_eh, obj_proficiency, obj_github)
 				c.execute("select name from student")
 				stud = [item[0] for item in c.fetchall()]
+
+				list2 = ['Python', 'Cpp', 'Java', 'JavaScript', 'InternetOfThings', 'MachineLearning', 'VirtualReality', 'AugmentedReality', 'CloudComputing', 'InformationSecurity']
+				c.execute("select s.name from student s, profile p where s.username = p.username and p.python = 'y'")
+				p1 = [item[0] for item in c.fetchall()]
+				c.execute("select s.name from student s, profile p where s.username = p.username and p.cpp = 'y'")
+				p2 = [item[0] for item in c.fetchall()]
+				c.execute("select s.name from student s, profile p where s.username = p.username and p.java = 'y'")
+				p3 = [item[0] for item in c.fetchall()]
+				c.execute("select s.name from student s, profile p where s.username = p.username and p.js = 'y'")
+				p4 = [item[0] for item in c.fetchall()]
+				c.execute("select s.name from student s, profile p where s.username = p.username and p.iot = 'y'")
+				p5 = [item[0] for item in c.fetchall()]
+				c.execute("select s.name from student s, profile p where s.username = p.username and p.ml = 'y'")
+				p6 = [item[0] for item in c.fetchall()]
+				c.execute("select s.name from student s, profile p where s.username = p.username and p.vr = 'y'")
+				p7 = [item[0] for item in c.fetchall()]
+				print(p7)
+				c.execute("select s.name from student s, profile p where s.username = p.username and p.ar = 'y'")
+				p8 = [item[0] for item in c.fetchall()]
+				c.execute("select s.name from student s, profile p where s.username = p.username and p.cc = 'y'")
+				p9 = [item[0] for item in c.fetchall()]
+				c.execute("select s.name from student s, profile p where s.username = p.username and p.eh = 'y'")
+				p10 = [item[0] for item in c.fetchall()]
 
 				c.execute("select username, iam, ii from profile where username != %s", (bleach.clean(username),))
 				exe1 = c.fetchall()
 				# a sequence or set will work here		# set the number to select here.
-				exe = random.sample(exe1, 4)
+				exe = random.sample(exe1, 6)
 
-				return render_template('success.html', username = username, stud = stud, obj = obj, ed = ed, exe = exe)
+				return render_template('success.html', username = username, stud = stud, obj = obj, ed = ed, exe = exe, list1 = list1, list2 = list2, p1=p1,p2=p2,p3=p3,p4=p4,p5=p5,p6=p6,p7=p7,p8=p8,p9=p9,p10=p10)
 			else:
 				redirect(url_for('logout'))
 		else:
@@ -253,68 +322,97 @@ def student(username):
 		github = request.form['github']
 
 		c.execute("UPDATE profile SET iam=(%s) WHERE username=(%s)", (bleach.clean(iam), bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET ii=(%s) WHERE username=(%s)", (bleach.clean(ii), bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET trends=(%s) WHERE username=(%s)", (bleach.clean(trends), bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET python=(%s) WHERE username=(%s)", (python, bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET cpp=(%s) WHERE username=(%s)", (cpp, bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET java=(%s) WHERE username=(%s)", (java, bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET js=(%s) WHERE username=(%s)", (js, bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET iot=(%s) WHERE username=(%s)", (iot, bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET ml=(%s) WHERE username=(%s)", (ml, bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET vr=(%s) WHERE username=(%s)", (vr, bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET ar=(%s) WHERE username=(%s)", (ar, bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET cc=(%s) WHERE username=(%s)", (cc, bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET eh=(%s) WHERE username=(%s)", (eh, bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET proficiency=(%s) WHERE username=(%s)", (proficiency, bleach.clean(username),))
-		db.commit()
 		c.execute("UPDATE profile SET github=(%s) WHERE username=(%s)", (bleach.clean(github), bleach.clean(username),))
 		db.commit()
-
+		
 		return redirect(url_for('student', username = username))
 
 @app.route('/save/', methods = ['GET', 'POST'])
 def save():
 	ed  = Edit(uname = request.form['uname'])
 
-	username = request.form['uname']
-	p_name = request.form['p_name']
-	des = request.form['des']
-	lang = request.form['lang']	
+		
 	if request.method == 'POST':
-		c.execute("insert into project values(%s, %s, %s, %s)", (bleach.clean(username), bleach.clean(p_name), bleach.clean(des), bleach.clean(lang),)) 
+
+		username = request.form['uname']
+
+		c.execute("select python, cpp, java, js, iot, ml, vr, ar, cc, eh, proficiency, github from profile where username = %s", (bleach.clean(username),))
+		res1 = c.fetchone()
+		list1 = []
+
+		obj_python = res1[0];	
+		if obj_python == 'y':	
+			list1.append('python')
+		obj_cpp = res1[1];	
+		if obj_cpp == 'y':	
+			list1.append('cpp')
+		obj_java = res1[2];	
+		if obj_java == 'y':	
+			list1.append('java')
+		obj_js = res1[3];	
+		if obj_js == 'y':	
+			list1.append('js')
+		obj_iot = res1[4];	
+		if obj_iot == 'y':	
+			list1.append('iot')
+		obj_ml = res1[5];	
+		if obj_ml == 'y':	
+			list1.append('ml')
+		obj_vr = res1[6];	
+		if obj_vr == 'y':	
+			list1.append('vr')
+		obj_ar = res1[7];	
+		if obj_ar == 'y':	
+			list1.append('ar')
+		obj_cc = res1[8];	
+		if obj_cc == 'y':	
+			list1.append('cc')
+		obj_eh = res1[9];	
+		if obj_eh == 'y':	
+			list1.append('eh')
+
+		p_name = request.form['p_name']
+		des = request.form['des']
+		python = request.form.get('python')
+		cpp = request.form.get('cpp')
+		java = request.form.get('java')
+		js = request.form.get('js')
+		print(js)
+		iot = request.form.get('iot')
+		ml = request.form.get('ml')
+		vr = request.form.get('vr')
+		ar = request.form.get('ar')
+		cc = request.form.get('cc')
+		eh = request.form.get('eh')
+		c.execute("insert into project values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (bleach.clean(username), bleach.clean(p_name), bleach.clean(des), python, cpp, java, js, iot, ml, vr, ar, cc, eh,)) 
 		db.commit()
 		flash("Details successfully submitted!")
-		return render_template('url.html', ed = ed)
+		return render_template('url.html', ed = ed, list1 = list1, username = username)
 
 @app.route('/project/<username>/')
 def project(username):
 	print(username)
-	c.execute("select p_name, des, lang from project where username = %s", (bleach.clean(username),))
+	c.execute("select p_name, des, python, cpp, java, js, iot, ml, vr, ar, cc, eh from project where username = %s", (bleach.clean(username),))
 	pro = c.fetchall()
 	print(pro)
-
 	return render_template('project.html', pro = pro, username = username)
 	#return jsonify(payload)
 
 @app.route('/hover/<username>/')
 def hover(username):
-	#print(p)
-	#o = p.split(', ')
-	#print (o)
-	#o1 = o[0]
 	print(username)
 	c.execute("select username, lang from project")
 	res = c.fetchall()
@@ -322,18 +420,33 @@ def hover(username):
 	return render_template('hover.html', exe = exe, username = username)
 
 
-#@app.route('/hovout/')
-#def hovout():
-#	#c.execute("select details from req where id = 1")
-#	#fet = c.fetchone()
-#	
-#	return "Success"
 
+@app.route('/id/<res>/')
+def idd(res):
+	c.execute("select username from student where name = %s", (bleach.clean(res),))
+	prof1 = c.fetchone()
+	#print(prof1)
+	prof = prof1[0]
+	#print(prof)
+	return redirect(url_for('profile', prof = prof))
 
+@app.route('/profile/<prof>/')
+def profile(prof):
+	c.execute("select id, name from student where username = %s", (bleach.clean(prof),))
+	res1 = c.fetchone()
+	c.execute("select iam, ii, trends from profile where username = %s", (bleach.clean(prof),))
+	res2 = c.fetchone()
+	obj = res1[0]
+	obj_name = res1[1]
+	obj_name_cap = obj_name.capitalize()
+	obj_iam = res2[0]
+	obj_ii = res2[1]
+	obj_trends = res2[2]
+	obj = Profile2(obj_name_cap, obj_iam, obj_ii, obj_trends)
+	c.execute("select name from student")
+	stud = [item[0] for item in c.fetchall()]
 
-@app.route('/profile/<res>/')
-def profile(res):
-	return "Success! " + res
+	return render_template('2.html', obj = obj, stud = stud, prof = prof)
 
 
 @app.route('/logout/')
@@ -354,6 +467,14 @@ def register():
 		uname = request.form['uname']
 		emailid = request.form['emailid']
 		pwd = request.form['pwd']
+
+		if(fname == "" or uname == "" or emailid == ""):
+			flash('Please fill out all the fields!')
+			return redirect(url_for('register'))
+		elif(len(pwd) < 6 or len(pwd) > 20):
+			flash('Password must be b/w 6-20 characters long!!')
+			return redirect(url_for('register'))
+
 		c.execute("select username from student where email = %s", (bleach.clean(emailid),))
 		result = c.fetchone()
 		if result != None:
@@ -383,7 +504,7 @@ def register():
 					return redirect(url_for('login'))
 				except SMTPRecipientsRefused:
 					db.rollback()
-					flash('Enter a valid E-mail ID!')
+					flash('Unknown Error! Please fill the form again.')
 					return redirect(url_for('register'))
 
 	elif request.method == 'GET':
@@ -413,6 +534,4 @@ def confirm_email(token):
 
 if __name__ == '__main__':
 	app.secret_key = secrets.token_bytes(32)
-	app.debug = True
-	app.run(host = '0.0.0.0', port = 5000)
-	#app.run --host = '0.0.0.0'
+	app.run(host = '0.0.0.0', port = 8000, debug = True)

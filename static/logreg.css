@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+#red {
+    color: red;
+}
+
 /* Style inputs */
 input[type=text], select, textarea, text {
     width: 100%;
@@ -84,3 +88,9 @@ input[type=submit]:hover {
     top: 20px;
     left: 20px;
 }
+
+/*#div1, #div2, #div3, #div4 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+}*/

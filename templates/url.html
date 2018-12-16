@@ -33,7 +33,37 @@
                             {{ed.uname}}
                             {{ ed.p_name.label }}  {{ ed.p_name(placeholder="Project Title") }}
                             {{ ed.des(placeholder="Project you have worked upon") }}
-                            {{ ed.lang(placeholder="Languages used in this project, separated by comma") }}
+                            {% if 'python' in list1 %}
+                            {{ed.python}}  {{ed.python.label}} 
+                          {% endif %}
+                          {% if 'cpp' in list1 %}
+                            {{ed.cpp}}  {{ed.cpp.label}} 
+                          {% endif %}
+                          {% if 'java' in list1 %}
+                            {{ed.java}}  {{ed.java.label}} 
+                          {% endif %}
+                          {% if 'js' in list1 %}
+                            {{ed.js}}  {{ed.js.label}} 
+                          {% endif %}
+                          {% if 'iot' in list1 %}
+                            {{ed.iot}}  {{ed.iot.label}} 
+                          {% endif %}
+                          {% if 'ml' in list1 %}
+                            {{ed.ml}}  {{ed.ml.label}} 
+                          {% endif %}
+                          {% if 'vr' in list1 %}
+                            {{ed.vr}}  {{ed.vr.label}} 
+                          {% endif %}
+                          {% if 'ar' in list1 %}
+                            {{ed.ar}}  {{ed.ar.label}} 
+                          {% endif %}
+                          {% if 'cc' in list1 %}
+                            {{ed.cc}}  {{ed.cc.label}} 
+                          {% endif %}
+                          {% if 'eh' in list1 %}
+                            {{ed.eh}}  {{ed.eh.label}} 
+                          {% endif %}
+              <br>
                             
               {{ ed.submit }}
               <input class="button" type="reset" value="Reset" id="reset" ></input>

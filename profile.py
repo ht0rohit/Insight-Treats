@@ -1,9 +1,5 @@
 class Profile:
 
-    experience = ""
-    technology = []
-    projects = {}
-
     def __init__(self, name, iam, ii, trends, python, cpp, java, js, iot, ml, vr, ar, cc, eh, proficiency, github):
       self.name = name
       self.iam = iam
@@ -22,13 +18,10 @@ class Profile:
       self.proficiency = proficiency
       self.github = github
 
-    def disp_name(self):
-      print(self.name)
+class Profile2:
 
-    def disp_name(self):
-      for tech in technology:
-        print(self.technology, " ")
-
-    #def disp_name(self):
-    # for key, value in projects
-    #  print(self.name)    
+    def __init__(self, name, iam, ii, trends):
+      self.name = name
+      self.iam = iam
+      self.ii = ii
+      self.trends = trends
